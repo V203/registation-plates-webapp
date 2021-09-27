@@ -7,6 +7,9 @@ module.exports = function ServicesFactory(pool) {
         try {
             parLocations = parLocations.toUpperCase().trim().replace(/ /g,"");
             let parID = parLocations.slice(0, 2)
+            // if(parID !== "CA" || parID !== "CY" || parID !== "CW"){
+            //     return "Please make your registration number starts with CA , CY or CW"
+            // }
             await pool.query('insert into reg_numbers(reg_nums,towns_id) values($1,$2)', [parLocations, parID]);                    
             } 
             catch (error)
@@ -39,12 +42,12 @@ module.exports = function ServicesFactory(pool) {
             console.log("The getCA function error "+error)
         }
     }
-    function errorOut(par){
+    function errorOut(par_){
+        let par = par_
         if( par ==="" ){
             return "Please enter A reg Number in the text field eg CA898989"
-
+        
         }
-
     }
     function successOut(par){
         
@@ -110,6 +113,5 @@ module.exports = function ServicesFactory(pool) {
         errorOut,
         successOut
         
-
     };
 }
