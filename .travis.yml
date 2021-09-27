@@ -1,3 +1,16 @@
-language: node_js
-node_js:
-  - 12
+{
+  "language": "node_js",
+  "env": [
+    "DATABASE_URL=postgresql://postgres@localhost:5432/regdb_tests"
+  ],
+  "node_js": [
+    "12"
+  ],
+  "before_script": [
+    "psql -c 'create database  db_tests;' -U postgres",
+    "psql -U postgres -d db_tests -a -f regdb.sql"
+  ],
+  "services": [
+    "postgresql"
+  ]
+}
