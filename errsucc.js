@@ -38,9 +38,15 @@ try{
 
         }
 
+        function errorLength(par) {
+            if(par.length !== 8){                
+                return "You have entered an invalid length of characters in the text field ,the text field requires 8 charcters eg CA123456"
+            }            
+        }
+
 
     return {
-        errorOut, successOut
+        errorOut, successOut,errorLength
 
     }
 

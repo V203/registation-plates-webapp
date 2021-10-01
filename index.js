@@ -41,10 +41,6 @@ app.use(flash());
 const PORT = process.env.PORT || 3017;
 
 app.get("/", async (req, res) => {
-    let input = req.params.nameInput
-    var parArr = await servicesFactory.allTowns()
-    console.log(input + " reg params");
-    console.log({parArr})
     res.render("index", {
         out: await servicesFactory.allTowns(),
         errorOut: errsucc.errorOut(req.body.nameInput,await servicesFactory.allTowns()),
@@ -65,12 +61,12 @@ app.post("/showAll", async (req, res) => {
 
 app.post("/", async (req, res) => {
     await servicesFactory.add(req.body.nameInput)
-    let theArr = await servicesFactory.allTowns()
-    console.log({theArr});
+    let theArr = await servicesFactory.allTowns()    
     res.render("index", {
         out: await servicesFactory.allTowns(),
         errorOut: errsucc.errorOut(req.body.nameInput, theArr),
-        successOut: errsucc.successOut(req.body.nameInput,theArr)
+        successOut: errsucc.successOut(req.body.nameInput,theArr),
+        errorOut:errsucc.errorLength(req.body.nameInput)
 
     })
     
