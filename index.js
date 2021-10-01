@@ -18,7 +18,9 @@ const connectionString = process.env.DATABASE_URL || 'postgresql://codex-coder:p
 
 const pool = new Pool({
     connectionString,
-    ssl: useSSL
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 app.use(session({
