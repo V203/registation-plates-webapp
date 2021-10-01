@@ -95,10 +95,12 @@ button_show{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     border-radius: 9px 9px 9px 9px;
     box-shadow:inset;
+    /* max-height:70px ; */
 
 }
 
 .confirm_out{
+    /* height: fit-content; */
     color: green;
     background-color: rgb(221, 245, 184);
     text-align: center;

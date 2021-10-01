@@ -2,6 +2,8 @@ const assert = require("assert");
 const ServicesFactory = require("../servicesFactory");
 const pg = require("pg");
 const servicesFactory = require("../servicesFactory");
+const { doesNotMatch, doesNotReject } = require("assert");
+const Errsucc =require("../errsucc");
 const Pool = pg.Pool;
 const connectionString = process.env.DATABASE_URL || 'postgresql://codex-coder:pg123@localhost:5432/regdb_test';
 const pool = new Pool({
@@ -19,6 +21,8 @@ describe('Registrion Numbers SQL queries', function () {
         }
         
     });
+
+    
 
     it("It Should add two number plates and and return the total length equal to 2.", async function () {
         let servicesFactory =  ServicesFactory(pool);        
@@ -112,15 +116,11 @@ describe('Registrion Numbers SQL queries', function () {
 
     // })
 
-    it("If an error occurs an error message should pop-up",async ()=>{
-        let servicesFactory = ServicesFactory(pool);
-        
-        assert.equal("Please enter A reg Number in the text field eg CA898989",servicesFactory.errorOut(""))
-
-    })
 
 
 
+
+    // done();
 
     after(function () {
         pool.end();
