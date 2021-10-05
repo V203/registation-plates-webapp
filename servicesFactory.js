@@ -1,7 +1,6 @@
 
 module.exports = function ServicesFactory(pool) {
-    
-    async function allTowns() {
+  const allTowns = async () =>{
         try {
             let results = await pool.query("Select reg_nums from reg_numbers")
             let results_ = []
@@ -13,6 +12,8 @@ module.exports = function ServicesFactory(pool) {
         }
     
     }
+
+    
     async function add(parLocations) {
 
         var townsArr = await allTowns()
@@ -48,7 +49,7 @@ module.exports = function ServicesFactory(pool) {
         }
     }
     
-    async function reset() {
+    const reset  = async ()=> {
         try {
             await pool.query("delete from reg_numbers");
         } catch (error) {
@@ -56,25 +57,11 @@ module.exports = function ServicesFactory(pool) {
         }
     }
 
-    async function addProto(parLocations) {
-        try {
-            parLocations = parLocations.toUpperCase().trim().replace(/ /g, "");
-            let parID = parLocations.slice(0, 2)
-            await pool.query('insert into  reg_numbers(reg_nums,towns_id) values($1,$2) ', [parLocations, parID]);
-
-
-        }
-        catch (error) {
-            console.log("error of add function ==> " + error);
-        }
-
-    }
-
     return {
         allTowns,
         add,
         reset,
-        getCAWY,
-        addProto
+        getCAWY
+        
     };
 }
