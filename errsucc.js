@@ -1,53 +1,36 @@
 module.exports = function errsucc() {
-    function errorOut(par, parArr_) {
 
-        var parArr_ = [];
-        
-        try {
+    function errorOut(par_) {
+        var par = cleanPar(par_)
 
-            if (par === "") {
-                
-                return "Please enter A reg Number in the text field eg CA898989"
-
-            } else if ((par.slice(0, 2) !== "CA" || par.slice(0, 2) !== "CY" || par.slice(0, 2) === "CW") && par.length !== 8 && /^[0-9]+$/.test(par.slice(2)) === false) {
-                return "You have entered an invalid reg number, make sure your reg number starts with CA ,CW or CY. eg CA121212"
-            } else if (/^[0-9]+$/.test(par.slice(2)) === false) {
-                return "Please enter the appropriate reg Nr eg CA 121212 ,CY656565 or CW 565656."
+                if (par === "" || par === undefined) {
+                return "Please enter a registration number in the text and hit add."
             }
-            else if (parArr_.includes(par) === true) {
-                return "The entered reg Nr already exist in the data base"
+            else if(par.length !== 8){
+                return "invalid length of characters please make sure you input 8 characters in the text field eg. CA 123 123."
+
+            }else if(/^[0-9]+$/.test(par.slice(2)) === false){
+                return "Please make  sure that the first two characters are alphabets and the rest are digits. eg CY 123 123."
+
+             }
+             else if(par.slice(0,2) !== "CA" && par.slice(0,2) !== "CY" && par.slice(0,2) !== "CW"){
+                return "Please make sure that you registration number starts with CA ,CW or CY eg 'CA 123 123'. "
+            }
+        
+    }
+
+    function cleanPar(par) {
+        try {
+            if (par !== undefined && par !== "") {
+                par = par.toUpperCase().trim().replace(/ /g, "");
+                return par
             }
         } catch (error) {
-            console.log("error message ==> " + error);
+            console.log(error + " cleanPar function error");
         }
     }
-    function successOut(par_) {
-try{
-        let par;
-        
-        (par_ !== undefined) ? par = par_.toUpperCase().trim().replace(/ /g, "") : null;        
-        if ((par.slice(0, 2) === "CA" || par.slice(0, 2) === "CY" || par.slice(0, 2) === "CW") && par.length === 8 && /^[0-9]+$/.test(par.slice(2)) === true ) {
-            
-            return "Registration number " + par + " successfully added to the database"
-        }
-
-    }catch(error){
-        console.log("success error")
-
-            }
-
-        }
-
-        function errorLength(par) {
-            if(par.length !== 8){                
-                return "You have entered an invalid length of characters in the text field ,the text field requires 8 charcters eg CA123456"
-            }            
-        }
-
-
     return {
-        errorOut, successOut,errorLength
-
+        errorOut, cleanPar
     }
-
 }
+

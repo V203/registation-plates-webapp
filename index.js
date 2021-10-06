@@ -3,7 +3,7 @@ const exphbs = require('express-handlebars');
 const bodyParser = require("body-parser");
 const pg = require('pg')
 const ServicesFactory = require("./servicesFactory");
-// const Errsucc =require("./errsucc");
+const Errsucc =require("./errsucc");
 const flash = require('express-flash');
 const session = require('express-session');
 const app = express();
@@ -31,7 +31,7 @@ app.use(session({
 }));
 
 var servicesFactory = ServicesFactory(pool);
-
+// var errsucc = Errsucc()
 app.set('view engine', 'handlebars');
 app.engine('handlebars', exphbs({ partialsDir: "./views/partials", viewPath: './views', layoutsDir: './views/layouts' }));
 

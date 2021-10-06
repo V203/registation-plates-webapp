@@ -8,10 +8,10 @@ if (errorDiv.innerHTML !== '') {
     
     setTimeout(function(){
         errorDiv.style.visibility = "hidden"
-    }, 4000)}
+    }, 5000)}
 
     if (successDiv.innerHTML !== '') {
         successDiv.style.visibility = "visible"
         setTimeout(function(){
             successDiv.style.visibility = "hidden"
-        }, 4000)}
+        }, 5000)}

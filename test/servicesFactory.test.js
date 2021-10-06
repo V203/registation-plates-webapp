@@ -108,20 +108,6 @@ describe('Registrion Numbers SQL queries', function () {
         assert.deepEqual(actual,expected);
     });
 
-    // it("Proto function ",async ()=>{
-    //     let servicesFactory = ServicesFactory(pool);
-    //     await servicesFactory.addProto("CA090909")
-    //     await servicesFactory.addProto("CA090909")
-    //     assert.equal(["CA090909"],await servicesFactory.allTowns())
-
-    // })
-
-
-
-
-
-    // done();
-
     after(function () {
         pool.end();
     })
