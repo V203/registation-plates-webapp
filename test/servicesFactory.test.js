@@ -1,9 +1,6 @@
 const assert = require("assert");
 const ServicesFactory = require("../servicesFactory");
 const pg = require("pg");
-const servicesFactory = require("../servicesFactory");
-const { doesNotMatch, doesNotReject } = require("assert");
-const Errsucc =require("../errsucc");
 const Pool = pg.Pool;
 const connectionString = process.env.DATABASE_URL || 'postgresql://codex-coder:pg123@localhost:5432/regdb_test';
 const pool = new Pool({
@@ -11,22 +8,16 @@ const pool = new Pool({
 });
 describe('Registrion Numbers SQL queries', function () {
     beforeEach(async function () {
-        console.log("*****");
-        // clean the tables before each test run
-        try {
-            // await pool.query("delete  from towns;")
+        console.log("*****");        
+        try {            
             await pool.query("delete from reg_numbers");
         } catch (error) {
             console.error(error);
-        }
-        
+        }        
     });
 
-    
-
     it("It Should add two number plates and and return the total length equal to 2.", async function () {
-        let servicesFactory =  ServicesFactory(pool);        
-        
+        let servicesFactory =  ServicesFactory(pool);                
             await servicesFactory.add('CA454545');
             await servicesFactory.add('CY454545');        
            let all = await servicesFactory.allTowns();
